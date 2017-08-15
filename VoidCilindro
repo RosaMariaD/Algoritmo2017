@@ -1,5 +1,7 @@
 // calculo del volumen de un cilindro.cpp : Defines the entry point for the console application.
 //
+//Nombre: Rosa Maria Diederich Rivero
+//Fecha: 15 de agosto del 2017
 
 #include "stdafx.h"
 #include <iostream>
