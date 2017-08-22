@@ -1,0 +1,38 @@
+// sistema.cpp : Defines the entry point for the console application.
+//
+#include "stdafx.h"
+#include <iostream>
+#include "conio.h"
+#include "stdlib.h"
+using namespace std;
+
+float leer();
+void sistema(float a, float b, float c, float d, float e, float f, float &x, float &y);
+
+void main()
+{
+	float r, a, b, c, d, e, f, x, y;
+	a=leer();
+    b=leer();
+    c=leer();
+    d=leer();
+    e=leer();
+    f=leer();
+
+    sistema(a, b, c, d, e, f, x, y);
+	cout << "la solucion del sistema es X: "<< x <<", Y:"<< y;
+	getch();
+}
+
+float leer()
+{float A;
+cout<<"\n Ingrese los valores de las constantes: ";
+cin>>A;
+return(A);
+}
+
+void sistema(float a, float b, float c, float d, float e, float f, float &x, float &y)
+{
+  y = ((a * f) - (d * c)) / ((a*e) - (d*b));
+  x = (c - b * y)/ a;
+}
