@@ -1,0 +1,61 @@
+// ecuacion cuadratica.cpp : Defines the entry point for the console application.
+//
+
+#include"stdafx.h"
+#include <iostream>
+#include"conio.h"
+#include"math.h"
+
+using namespace std;
+
+void Val_a(float &A);
+float Val_b();
+float Val_c();
+void Solucion(float &A,float &B,float &C,float &X1,float &X2);
+
+void main()
+{float a,b,c,x1,x2;
+Val_a(a);
+b=Val_b();
+c=Val_c();
+Solucion(a,b,c,x1,x2);
+getch();
+}
+
+void Val_a(float &A)
+{do
+{cout<<"\n Ingrese coeficiente A: ";
+ cin>> A;
+}while(A==0);
+}
+
+float Val_b()
+{float B;
+ cout<<"\ Ingrese coeficiente B: ";
+ cin>> B;
+return (B);
+}
+
+float Val_c()
+{float C;
+ cout<<"\ Ingrese coeficiente C: ";
+ cin>> C;
+ return (C);
+}
+
+void Solucion(float &A,float &B,float &C,float &X1,float &X2)
+{if(pow(B,2)-(4*A*C)<0)
+  {cout<<"\n SOLUCION IMAGINARIA";
+  }
+else
+  {if(pow(B,2)-(4*A*C)==0)
+    {X1=((-1)*B)/(2*A);
+     cout<<"\n Una solucion: "<<X1;
+    }
+   else
+    {X1=(((-1)*B)+sqrt(pow(B,2)-(4*A*C)))/(2*A);
+     X2=(((-1)*B)-sqrt(pow(B,2)-(4*A*C)))/(2*A);
+     cout<<"\n Dos soluciones X1= "<<X1<<", X2="<< X2;
+    }
+  }
+}
