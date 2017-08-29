@@ -9,7 +9,7 @@
 
 using namespace std;
 
-void main(int argc, _TCHAR* argv[])
+void main()
 {int Tamaño;
  string Nombre; 
  string Inverso;
