@@ -1,0 +1,105 @@
+// palindromo.cpp : Defines the entry point for the console application.
+//
+//ROSA MARIA DIEDERICH RIVERO
+#include "stdafx.h"
+#include <iostream>
+#include <string>
+#include "conio.h"
+#include "math.h"
+
+#define ent '\n'
+#define N 100
+
+float areatri(float l1, float l2, float l3);
+void vector();
+void palindromo();
+
+
+using namespace std;
+
+void main()
+{int opc, l1, l2, l3;
+ float area, sp, Invertido;
+  do
+  {
+    cout<<"\n ------------------------------MENU-----------------------------";
+    cout<<"\n Elija una opcion: ";
+    cout<<"\n [1]----> Area triangulo en funcion de sus lados";
+    cout<<"\n [2]----> Mayor diferencia entre dod numeros consecutivos vector";
+    cout<<"\n [3]----> String Palindromo";
+    cout<<"\n [0]----> salir";
+    cin>> opc;
+
+   switch(opc)
+     {case 1: 
+         {cout<<"Ingrese lado del triangulo: ";
+		  cin>> l1;
+		  cout<<"Ingrese lado del triangulo: ";
+		  cin>> l2;
+		  cout<<"Ingrese lado del triangulo: ";
+		  cin>> l3;
+		  area= areatri(l1, l2, l3);
+		  cout<<"El area del triangulo es: "<< area;
+		 }break;
+      case 2:
+	     vector();
+         break;
+      case 3: palindromo();
+	      break;
+      case 0: cout<<"Salir";    
+     }
+   system ("cls");
+   }while(opc<0 ||  opc>3);
+getch();	
+}
+
+float areatri(float l1, float l2, float l3)
+ {float sp, area;
+  sp= (l1+l2+l3)/2;
+  area= sqrt(sp*((sp-l1)*(sp-l2)*(sp-l3)));
+  return(area);
+ }
+
+
+void vector()
+{int  L;
+ float  V[N], dif;
+  do
+   {cout<< "Ingrese el limite del vector: ";
+    cin>> L;
+   }while(L>N);
+  for(int i=0; i<L; i++)
+     {cout<<"\n V["<< i<< "]=";
+	   cin>> V[i];
+	  }
+   dif=abs(V[0]-V[1]);
+   for(int i=0; i<L-1; i++)
+	  {if(abs(V[i]-V[i+1])>dif)
+		   {dif= abs(V[i]-V[i+1]);
+		    }
+	   }
+ cout<<"La mayor diferencia entre dos numeros consecutivos es:"<<dif;
+ getch();
+}
+
+
+void palindromo()
+  {int Tamaño;
+   string Nombre; 
+   string Inverso;
+   cout<<"Ingrese un nombre: ";
+   getline(cin, Nombre, ent);
+   Tamaño=Nombre.length();
+
+  for (int i=Tamaño-1; i>=0; i--)
+	{Inverso= Inverso + Nombre[i];
+	}
+   cout <<"El nombre invertido es: "<< Inverso << endl;
+	
+   if (Nombre==Inverso)
+      {cout<<"El nombre es un palindromo"<<endl;
+	  }
+   else
+	 {cout<<"No es un palindromo"<<endl;
+	 }
+}
