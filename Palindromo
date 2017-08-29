@@ -1,0 +1,33 @@
+// palindromo.cpp : Defines the entry point for the console application.
+//
+//ROSA MARIA DIEDERICH RIVERO
+#include "stdafx.h"
+#include <iostream>
+#include <string>
+#include "conio.h"
+#define ent '\n'
+
+using namespace std;
+
+void main(int argc, _TCHAR* argv[])
+{int Tamaño;
+ string Nombre; 
+ string Inverso;
+ cout<<"Ingrese un nombre: ";
+ getline(cin, Nombre, ent);
+ Tamaño=Nombre.length();
+
+ for (int i=Tamaño-1; i>=0; i--)
+	{Inverso= Inverso + Nombre[i];
+	}
+  cout <<"El nombre invertido es: "<< Inverso << endl;
+	
+   if (Nombre==Inverso)
+      {cout<<"El nombre es un palindromo"<<endl;
+	  }
+   else
+	 {cout<<"No es un palindromo"<<endl;
+	 }
+ 
+getch();	
+}
