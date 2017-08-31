@@ -1,105 +1,88 @@
-// palindromo.cpp : Defines the entry point for the console application.
+// prueba string.cpp : Defines the entry point for the console application.
 //
-//ROSA MARIA DIEDERICH RIVERO
+
 #include "stdafx.h"
 #include <iostream>
 #include <string>
 #include "conio.h"
 #include "math.h"
 
-#define ent '\n'
 #define N 100
-
-float areatri(float l1, float l2, float l3);
-void vector();
-void palindromo();
-
+#define ent '\n'
 
 using namespace std;
 
+float areatri(int a, int b, int c, float area);
+void vector();
+
 void main()
-{int opc, l1, l2, l3;
- float area, sp, Invertido;
-  do
-  {
-    cout<<"\n ------------------------------MENU-----------------------------";
-    cout<<"\n Elija una opcion: ";
-    cout<<"\n [1]----> Area triangulo en funcion de sus lados";
-    cout<<"\n [2]----> Mayor diferencia entre dod numeros consecutivos vector";
-    cout<<"\n [3]----> String Palindromo";
-    cout<<"\n [0]----> salir";
-    cin>> opc;
+{int opc, a, b, c, Longitud;
+ float area;
+ string Nombre;
+ string Inverso;
 
-   switch(opc)
-     {case 1: 
-         {cout<<"Ingrese lado del triangulo: ";
-		  cin>> l1;
-		  cout<<"Ingrese lado del triangulo: ";
-		  cin>> l2;
-		  cout<<"Ingrese lado del triangulo: ";
-		  cin>> l3;
-		  area= areatri(l1, l2, l3);
-		  cout<<"El area del triangulo es: "<< area;
-		 }break;
-      case 2:
-	     vector();
-         break;
-      case 3: palindromo();
-	      break;
-      case 0: cout<<"Salir";    
-     }
-   system ("cls");
-   }while(opc<0 ||  opc>3);
-getch();	
-}
+ cout<<"\n------------------------MENU-------------------------";
+ cout<<"\n [1]---> Area de un triangulo en funcion de sus lados";
+ cout<<"\n [2]---> Mayor diferencia entre dos numeros consecutivos en un vector";
+ cout<<"\n [3]---> Saber si un nombre es palindromo";
+ cout<<"\n [0]---> Salir";
+ cout<<"\n Elegir una opcion: "<<"\t";
+ cin>> opc;
 
-float areatri(float l1, float l2, float l3)
- {float sp, area;
-  sp= (l1+l2+l3)/2;
-  area= sqrt(sp*((sp-l1)*(sp-l2)*(sp-l3)));
-  return(area);
- }
+ switch(opc)
+   {case 1: 
+        {cout<<"\n Ingrese los lados del triangulo: \t";
+		 cin>>a,b,c;
+		 area= areatri(a,b,c,area);
+		 cout<<"\n El area del triangulo es:"<<area;
+		}break;
+   case 2:
+	   {vector();
+	   }break;
+   case 3:
+	   {cout<<"\n Ingrese un nombre: ";
+        cin>>Nombre;
+        Longitud= Nombre.length();
 
+        for(int i= Longitud-1; i>=0; i--)
+           {Inverso= Inverso + Nombre[i];
+           }
+		cout<<"\n El nombre inverso es: "<<Inverso;
+		if(Nombre==Inverso)
+		cout<<"\n El nombre es palindromo";
+		else
+		cout<<"\n El nombre no es palindromo";
+	   }break;
+   }
 
-void vector()
-{int  L;
- float  V[N], dif;
-  do
-   {cout<< "Ingrese el limite del vector: ";
-    cin>> L;
-   }while(L>N);
-  for(int i=0; i<L; i++)
-     {cout<<"\n V["<< i<< "]=";
-	   cin>> V[i];
-	  }
-   dif=abs(V[0]-V[1]);
-   for(int i=0; i<L-1; i++)
-	  {if(abs(V[i]-V[i+1])>dif)
-		   {dif= abs(V[i]-V[i+1]);
-		    }
-	   }
- cout<<"La mayor diferencia entre dos numeros consecutivos es:"<<dif;
  getch();
 }
 
 
-void palindromo()
-  {int Tamaño;
-   string Nombre; 
-   string Inverso;
-   cout<<"Ingrese un nombre: ";
-   getline(cin, Nombre, ent);
-   Tamaño=Nombre.length();
+float areatri(int a, int b, int c, float area)
+  {float sp;
+   sp= (a+b+c)/2;
+   area= sqrt(sp*((sp-a)*(sp-b)*(sp-c)));
+   return(area);
+  }
 
-  for (int i=Tamaño-1; i>=0; i--)
-	{Inverso= Inverso + Nombre[i];
-	}
-   cout <<"El nombre invertido es: "<< Inverso << endl;
-	
-   if (Nombre==Inverso)
-      {cout<<"El nombre es un palindromo"<<endl;
-	  }
-   else
-	 {cout<<"No es un palindromo"<<endl;
-	 }
-}
+void vector()
+  {int L;
+   float V[N], dif;
+   do
+     {cout<<"\n Ingrese el limite del vector: ";
+      cin>>L;
+	 }while(L>N);
+   for(int i=0; i<L; i++)
+     {cout<<"V["<<i<<"]=";
+      cin>>V[i];
+     }
+   dif=abs(V[0]-V[1]);
+   for(int i=0; i<L-1; i++)
+     {if(abs(V[i]-V[i+1])>dif)
+        {dif= abs(V[i]-V[i+1]);
+        }
+     }
+   cout<<"\n La mayor diferencia entre dos numeros consecutivos es: "<< dif;
+  getch();
+  }
