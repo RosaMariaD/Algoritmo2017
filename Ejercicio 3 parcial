@@ -1,0 +1,32 @@
+#include "stdafx.h"
+#include <iostream>
+#include <string>
+#include "conio.h"
+using namespace std;
+void palabra(string a, int ancho);
+
+void main()
+{int ancho;
+ string a;
+ cout<<"\n Ingrese un nombre: ";
+ getline(cin, a);
+ ancho=a.length();
+ palabra(a,ancho);
+  getch();
+}
+
+void palabra(string a, int ancho)
+{
+ string i;
+ string suf;
+ string pre;
+ string ant;
+ string b;
+
+ i= '*';
+ ant=i+i+i+i+i+a;
+ b=ant+suf;
+
+ cout<<"\n "<<b;
+}
+
