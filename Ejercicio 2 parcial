@@ -1,0 +1,40 @@
+#include "stdafx.h"
+#include <iostream>
+#include "conio.h"
+#include "math.h"
+using namespace std;
+
+float fac(int e, int a, float &F);
+
+void main()
+{int N, a, e;
+ float S, F, X, num, den;
+ cout<<"\n Ingrese elultimo exponente: ";
+ cin>>N;
+ cout<<"\n Ingrese la base: ";
+ cin>>X;
+ e=1;
+ S=3;
+ a=1;
+ while(e<N)
+ {if(e%2!=2)
+   {num= pow(X,e);
+    den=fac(e,a,F);
+	S=S+(num/den);
+	a++;
+   }
+  e++;
+ } 
+ cout<<"\n La suma de la serie es: "<<S;
+ getch();
+}
+
+float fac(int e, int a, float &F)
+{int c=-1;
+	if(a%2==0)
+	F=F*a;
+	else
+	F=F*a*c;
+return F;
+}
+
