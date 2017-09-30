@@ -1,0 +1,95 @@
+// salario neto.cpp : Defines the entry point for the console application.
+//
+
+#include "stdafx.h"
+#include <iostream>
+#include <string>
+#include "conio.h"
+#define MAX 5
+#define salminimo 2000
+#define iva 0.13
+#define afp 0.121
+using namespace std;
+
+struct tEmpleado
+ {int nroemp, telef, cel;
+  string nombre, apellido, direccion;
+  float salbruto, salneto;
+ };
+
+void cargar(tEmpleado Empleado[], int N);
+void mostrar(tEmpleado Empleado[], int N);
+void calcular(tEmpleado Empleado[], int N);
+
+void main()
+{int N;
+ tEmpleado Empleado[MAX];
+ do
+   {cout<<"\n Ingrese el numero de empleados: ";
+    cin>> N;
+   }while(N<0 || N>MAX);
+   cargar( Empleado,  N);
+   mostrar(Empleado,  N);
+   calcular(Empleado, N);
+ getch();
+}
+
+void cargar(tEmpleado Empleado[], int N)
+{int cont=1;
+ for(int i=0; i<N; i++)
+  {cout<<"\n";
+   Empleado[i].nroemp= cont;
+   cout<<"Numero del empleado: "<<cont;
+   cout<<"\nIngrese el nombre del empleado: ";
+   cin.ignore();
+   getline(cin, Empleado[i].nombre);
+   cout<<"Ingrese el apellido del empleado: ";
+   getline(cin, Empleado[i].apellido);
+   cout<<"Ingrese la direccion del empleado: ";
+   getline(cin, Empleado[i].direccion);
+   cout<<"Ingrese el telefono del empleado: ";
+   cin>> Empleado[i].telef;
+   cout<<"Ingrese el celular del empleado: ";
+   cin>> Empleado[i].cel;
+   cout<<"Ingrese el slario bruto del empleado: ";
+   cin>> Empleado[i].salbruto;
+   cont++;
+  }
+}
+
+void mostrar(tEmpleado Empleado[], int N)
+{  for(int i=0; i<N; i++)
+  {cout<<" "<<Empleado[i].nroemp;
+   cout<<" "<<Empleado[i].nombre;
+   cout<<" "<<Empleado[i].apellido;
+   cout<<" "<<Empleado[i].direccion;
+   cout<<" "<<Empleado[i].telef;
+   cout<<" "<<Empleado[i].cel;
+   cout<<" "<<Empleado[i].salbruto;
+   cout<<"\n\n";
+  }
+}
+
+void calcular(tEmpleado Empleado[], int N)
+{
+ for(int i=0; i<N; i++)
+  {if(Empleado[i].salbruto > 2*salminimo)
+    {Empleado[i].salneto=Empleado[i].salbruto-(Empleado[i].salbruto*(afp + iva));
+    }
+  else
+   {Empleado[i].salneto=Empleado[i].salbruto-(Empleado[i].salbruto*afp);
+   }
+  }
+
+  for(int i=0; i<N; i++)
+  {cout<<" "<<Empleado[i].nroemp;
+   cout<<" "<<Empleado[i].nombre;
+   cout<<" "<<Empleado[i].apellido;
+   cout<<" "<<Empleado[i].direccion;
+   cout<<" "<<Empleado[i].telef;
+   cout<<" "<<Empleado[i].cel;
+   cout<<" "<<Empleado[i].salbruto;
+   cout<<" "<<Empleado[i].salneto;
+   cout<<"\n\n";
+  }
+}
