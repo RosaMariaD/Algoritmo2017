@@ -1,0 +1,47 @@
+
+// multiplicacion de matrices.cpp : Defines the entry point for the console application.
+//
+
+#include "stdafx.h"
+#include <iostream>
+#include "conio.h"
+#define MAX 5
+using namespace std;
+
+void main()
+{int N, A[MAX][MAX], B[MAX][MAX], C[MAX][MAX];
+ do
+   {cout<<"\n Ingrese el tamano de la matriz:";
+    cin>>N;
+   }while(N<0 || N>MAX);
+ cout<<"\n Ingrese los valores de la matriz A:";
+ for(int i=0; i<N; i++)
+  {for(int j=0; j<N; j++)
+    {cin>> A[i][j];
+    }
+  }
+ cout<<"\n Ingrese los valores de la matriz B";
+ for(int i=0; i<N; i++)
+  {for(int j=0; j<N; j++)
+    {cin>> B[i][j];
+    }
+  }
+
+ for(int i=0; i<N; i++)
+  {for(int j=0; j<N; j++)
+    {C[i][j]=0;
+     for(int k=0; k<N; k++)
+      {C[i][j]= C[i][j]+(A[i][k]*B[k][j]);
+      }
+    }
+  }
+ for(int i=0; i<N; i++)
+  {for(int j=0; j<N; j++)
+    {cout<<C[i][j];
+     if(j==2)
+      {cout<<endl;
+	  }
+   }
+  }
+  getch();
+}
