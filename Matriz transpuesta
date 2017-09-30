@@ -1,0 +1,47 @@
+// matriz transpuesta.cpp : Defines the entry point for the console application.
+//
+
+#include "stdafx.h"
+#include <iostream>
+#include "conio.h"
+#define F 5
+#define C 5
+using namespace std;
+
+void main()
+{int M, N, Mat[F][C];
+ int Trans[C][F];
+ do
+  {cout<<"\n Ingrese el numero de filas de la matriz:";
+   cin>>M;
+  }while(M<0 || M>F);
+   do
+  {cout<<"\n Ingrese el numero de columnas de la matriz:";
+   cin>>N;
+  }while(N<0 || N>F);
+
+  cout<<"\n Ingrese los valores de la matriz: ";
+  for(int i=0; i<M; i++)
+	{for(int j=0; j<N; j++)
+      {cin>>Mat[i][j];
+      }
+    }
+  cout<<"Matriz original";
+  cout<<"\n ";
+  for(int i=0; i<M; i++)
+   {for(int j=0; j<N; j++)
+     {cout<<" "<< Mat[i][j];
+     }
+   }
+  cout<<"\n ";
+  cout<<"Matriz Transpuesta";
+  cout<<"\n ";
+  for(int i=0; i<N; i++)
+   {for(int j=0; j<M; j++)
+    {cout<<" "<<Mat[j][i];
+    }
+   }
+
+	getch();
+}
+
