@@ -1,0 +1,73 @@
+// primer ejercicio.cpp : Defines the entry point for the console application.
+//
+
+#include "stdafx.h"
+#include <iostream>
+#include "conio.h"
+#define MAX 10
+using namespace std;
+
+struct tvector
+{int V[2];
+};
+
+tvector vec[MAX];
+void cargar(int n);
+void mostrar(int n);
+bool curioso(int x);
+float factorial(int x);
+
+void main()
+{int n;
+ cout<<"\n Ingrese el tamano del vector";
+ cin>>n;
+ cargar(n);
+ cout<<"\n";
+ mostrar(n);
+ for(int i=0; i<n; i++)
+  {for(int j=0; j<2; j++)
+    {if(curioso(vec[i].V[j])==false)
+	     {cout<<" "<<vec[i].V[j]<<" es curioso";
+	     }
+	else
+	     {cout<<" "<<vec[i].V[j]<<" no es curioso";
+         }
+     }
+  }
+ _getch();
+}
+
+void cargar(int n)
+{for(int i=0; i<n; i++)
+  {for(int j=0; j<2; j++)
+     {cin>>vec[i].V[j];
+     }
+  }
+}
+
+void mostrar(int n)
+{for(int i=0; i<n; i++)
+  {for(int j=0; j<2; j++)
+     {cout<<vec[i].V[j];
+      cout<<" ";
+     }
+   cout<<"\n ";
+  }
+}
+
+bool curioso(int x)
+{bool k=true;
+ int D, num, fac, s=0;;
+ num=x;
+  {while(x>0)
+	  {D=x%10;
+       fac=factorial(D);
+	   x=x/10;
+	   s=s+fac;
+      }
+  }
+if(s==num)
+ {k=false;
+ }
+ return k;
+}
