@@ -1,0 +1,41 @@
+#include "stdafx.h"
+#include "conio.h"
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+void convertir(string a);
+void frecuencia(string a);
+
+void main()
+{string a;
+ cout<<"\n Ingrese una palabra: ";
+ cin>>a;
+ convertir(a);
+ frecuencia(a);
+ getch();
+}
+
+void convertir(string a)
+{int cont=0;
+ for(int i=0;i<a.length();i++)
+     {if(islower(a[i]))
+	    {a[i]=toupper(a[i]);
+        }
+     }
+cout<<"\n La palabra en mayusculas es: "<<a; 
+}
+    
+
+void frecuencia(string a)
+{int cont=0;
+ for(int i=0;i<a.length()-1;i++)
+	{for(int j=i+1;a.length();j++)
+	    {if(a[i]==a[j])
+	       {cont++;
+	       }
+	    }
+    }
+ cout<<"\n Las letras se repiten: "<<cont<<" veces.";
+}
