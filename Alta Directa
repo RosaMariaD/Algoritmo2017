@@ -1,0 +1,107 @@
+// alta directa.cpp : Defines the entry point for the console application.
+//
+
+#include "stdafx.h"
+#include <iostream>
+#include "conio.h"
+#include <string>
+#include "stdlib.h"
+using namespace std;
+
+void ALTA_DIRECTA();
+void LISTADO_DIRECTO();
+struct t_lugar
+{
+	int no_lugar;
+	string descrip;
+	string ubicacion;
+	float precio;
+	int oferta;
+};
+
+t_lugar Registro;
+FILE *PLACE;
+
+void main()
+{
+	int op;
+	do
+	{
+		cout<<"              MENU          "<<endl;
+		cout<<"(1) Adicionar-Insertar"<<endl;
+		cout<<"(2) Listado"<<endl;
+		cout<<"(3) Modificacion"<<endl;
+		cout<<"(4) Consulta"<<endl;
+		cout<<"(5) Borrado"<<endl;
+		cout<<"(0) Salir"<<endl;
+		cout<<endl;
+		cout<<"Ingrese la opcion que desea: ";
+		cin>>op;
+		switch(op)
+		{
+		case 1:
+			{
+				ALTA_DIRECTA();
+				break;
+			}
+		case 2:
+			{
+				LISTADO_DIRECTO();
+				break;
+			}
+		
+		case 0:
+			{
+				cout<<"Salir";
+				break;
+			}
+		default:
+			{
+			}
+		}
+		cout<<endl;
+	}while(op!=0);
+	ALTA_DIRECTA();
+	LISTADO_DIRECTO();
+	getch();
+
+}
+ 
+void ALTA_DIRECTA() 
+{ long int dir_fisica; 
+  int no_lugar;                                            // Variable local para el numero de producto 
+  cout << "\n\rALTAS DE REGISTROS DE LUGARES"; 
+  PLACE=fopen("LUGARES.DIR","rb+");                     // Intenta abrir el archivo LUGARES.DIR 
+                                                      // en modo de lectura/escritura 
+  if(PLACE==NULL) 
+  PLACE=fopen("LUGARES.DIR","wb");                // Crea el archivo en caso de no existir 
+  cout << "\n\n\n\rNumero de lugar: "; 
+  cin >> no_lugar; 
+  dir_fisica=no_lugar*sizeof(Registro);             // Calculo de la dir. fisica 
+  fseek(PLACE,dir_fisica,SEEK_SET);               //Posicionar el apuntador del archivo
+  fread(&Registro,sizeof(Registro),1,PLACE); 
+                                                 // Lee el "Registro", de tamano=sizeof(Registro) del archivo "alias"
+  if(Registro.no_lugar==no_lugar) 
+  { 
+       cout << "\n\n\n\rRegistro duplicado !!!"; 
+       fclose(PLACE); 
+       getch(); 
+       return; 
+  } 
+  cout << "\n\rDescripcion: "; 
+  getline(cin,Registro.descrip); 
+  cout << "\n\r Oferta  : ";
+  cin >> Registro.oferta; 
+  cout << "\n\rPrecio     : "; 
+  cin >> Registro.precio; 
+  cout<< "\n\r Ubicacion: ";
+  cin>>Registro.ubicacion;
+
+  Registro.no_lugar=no_lugar; 
+  fseek(PLACE,dir_fisica,SEEK_SET);                 //Posicionar el apuntador del archivo
+  fwrite(&Registro,sizeof(Registro),1,PLACE);       // Grabar el Registro completo 
+  fclose(PLACE);                                    // Cierra el archivo 
+  cout << "\n\n\n\rProducto registrado !!!"; 
+  cout << "\n\r<<< Oprima cualquier tecla para continuar >>>"; 
+  getch(); 
+}
