@@ -1,0 +1,189 @@
+// proyecto arreglado.cpp : Defines the entry point for the console application.
+//
+#include "stdafx.h"
+#include <iostream>
+#include <string>
+#include "conio.h"
+#define M 10
+using namespace std;
+
+//----------------------ESTRUCTURAS--------------------------------------//
+
+struct tcliente
+{int IDc[M];
+ string nombrec;
+ string apellidoc;
+ string fechac [10];
+ string correoc;
+ int contrasenac;
+ int estadoc;
+};
+tcliente registro;
+
+struct tcupones
+{string cupon;
+ int cantidad;
+};
+tcupones cuponeria;
+
+struct tpropietario
+{int IDp[M];
+ string establecimientop;
+ string descripcionp;
+ string direccionp;
+ string correop;
+ int contrasenap;
+};
+
+tpropietario registrro;
+
+struct tpagamento
+{string fechapag[10];
+ int pago;
+ int deuda;
+};
+ 
+tpagamento pagar;
+
+//-----------------------------FUNCIONES-----------------------------------------//
+void registro_cliente();
+void registro_propietario();
+void inicio_propietario();
+void inicio_cliente();
+void listadocliente();
+void listadolugares();
+float pagosclientes();
+float deudasclientes();
+
+//-----------------------------VALIDACIONES-------------------------------------//
+
+char validarnumeroentero (int X);
+bool verifexisteidcliente(int Y);
+bool verificarCorreo(string correo);
+bool verificacionfecha(string fecha);
+void ingreso_contrasena_cliente();
+bool verifexisteidpopietario(int x);
+
+//----------------------------MENU PRINCIPAL-----------------------------------//
+
+void main()
+{int opc1, opc2, opc3, opc4;
+ cout<<"\n ##############    ################   ###          ###    #########     ";
+ cout<<"\n ###                     ###          ####         ###    ###      ##   ";
+ cout<<"\n ###                     ###          #####        ###    ###       ##  ";
+ cout<<"\n ###                     ###          ### ##       ###    ###        ## ";
+ cout<<"\n ###                     ###          ###  ##      ###    ###         ##";
+ cout<<"\n ##############          ###          ###   ##     ###    ###         ##";
+ cout<<"\n ###                     ###          ###    ##    ###    ###         ##";
+ cout<<"\n ###                     ###          ###     ##   ###    ###        ## ";
+ cout<<"\n ###                     ###          ###      ##  ###    ###       ##  ";
+ cout<<"\n ###                     ###          ###       ## ###    ###      ##   ";
+ cout<<"\n ###               ################   ###        #####    #########     ";
+ cout<<"\n\n\n";
+ cout<<"\n ########      ###                   ###        ###########   ##########   ";
+ cout<<"\n ###    ##     ###                  ## ##       ###           ###          ";
+ cout<<"\n ###     ##    ###                 ##   ##      ###           ###          ";
+ cout<<"\n ###     ##    ###                ##     ##     ###           ###          ";
+ cout<<"\n ###     ##    ###               ##       ##    ###           ###          ";
+ cout<<"\n ###    ##     ###              ##         ##   ###           ##########   ";
+ cout<<"\n #######       ###             ###############  ###           ###          ";
+ cout<<"\n ###           ###             ##           ##  ###           ###          ";
+ cout<<"\n ###           ###             ##           ##  ###           ###          ";
+ cout<<"\n ###           ###             ##           ##  ###           ###          ";
+ cout<<"\n ###           #############   ##           ##  ###########   ##########   ";
+ cout<<"\n\n\n";
+ cout<<"\n\t\t\t        BIENVENIDO/A ";
+ do
+   {cout<<"[1]   Crear cuenta";
+    cout<<"[2]   Iniciar sesion";
+	cout<<"[0]   Salir";
+	cin>>opc1;
+	switch(opc1)
+	{case 1:
+	  {do
+	    {cout<<"\n Desea crear una cuenta de cliente o propietario";
+		  cout<<"[1]  Cliente";
+		  cout<<"[2]  Propietario";
+		  cout<<"[0]  Salir";
+		  cin>>opc2;
+		  switch(opc2)
+		    {case 1: registro_cliente(); break;
+			 case 2: registro_propietario(); break;
+			 case 3: cout<<"\n GRACIAS POR USAR LA APP FIND PLACE ;)"; break;
+		    }
+		}while(opc2<0 || opc2>2);
+	  }break;
+	case 2:
+	  {do
+		{cout<<"\n Desea iniciar sesion como cliente o propietario";
+		 cout<<"[1]  Cliente";
+		 cout<<"[2]  Propietario";
+		 cout<<"[0]  Salir";
+		 cin>>opc2;
+		 switch(opc2)
+		   {case 1: inicio_cliente();break;
+		    case 2: inicio_propietario();break;
+			case 3: cout<<"\n GRACIAS POR USAR LA APP FIND PLACE ;)";break;
+		   }
+		}while(opc2<=0 || opc2>2);
+	  }break;
+	case 3: cout<<"\n GRACIAS POR USAR LA APP FIND PLACE ;)"; break;
+	default: cout<<"\n ERROR"; break;
+	}
+   }while(opc1!=0);
+ getch();
+}
+
+//-------------------------------------FUNCIONES--------------------------------//
+
+void registro_cliente()
+{FILE *ptr;
+ do
+  {cout << "\n Introduzca su ID: ";
+   for(int i=0; i<M; i++)
+    {registro.IDc[i]= validarnumeroentero (registro.IDc[i]);
+    }
+  }while(verifexisteidcliente(registro.IDc[M])==true);
+ cout << "\n Introduzca su nombre: ";
+ getline(cin,registro.nombrec);
+ cout<<"\n Introduzca sus apellido: ";
+ getline(cin, registro.apellidoc);
+ do
+   {cout<<"\n Ingrese la fecha de ingreso: ";
+   }while(verificacionfecha(registro.fechac[10])==true);
+do
+  {cout << "\n Ingrese el Email: ";
+   getline(cin, registro.correoc);
+  }while(verificarCorreo(registro.correoc)==true);
+ ingreso_contrasena_cliente();
+ registro.estadoc = 0;
+ ptr = fopen("cliente.dat","ab");
+ fwrite(&registro,sizeof(registro),1,ptr);
+ fclose(ptr);
+}
+
+void registro_propietario()
+{FILE *ptr;
+ do
+  {cout << "\n Introduzca su ID: ";
+   for(int i=0; i<M; i++)
+    {registrro.IDp[i]= validarnumeroentero (registrro.IDp[i]);
+    }
+  }while(verifexisteidpopietario(registrro.IDp[M])==true);
+ cout << "\n Introduzca el nombre de su establecimiento: ";
+ getline(cin,registrro.establecimientop);
+ cout<<"\n Introduzca la descipcion de su establecimiento: ";
+ getline(cin, registrro.descripcionp);
+ do
+   {cout<<"\n Ingrese la fecha de ingreso: ";
+   }while(verificacionfecha(registro.fechac[10])==true);
+do
+  {cout << "\n Ingrese el Email: ";
+   getline(cin, registro.correoc);
+  }while(verificarCorreo(registro.correoc)==true);
+ingreso_contrasena();
+ registro.estadoc = 0;
+ ptr = fopen("cliente.dat","ab");
+ fwrite(&registro,sizeof(registro),1,ptr);
+ fclose(ptr);
+}
